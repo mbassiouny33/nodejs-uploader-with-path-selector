@@ -1,15 +1,19 @@
-var express = require('express');
-var multer  = require('multer');
-var fs  = require('fs');
-var os = require('os');
-var app = express();
+const express = require('express');
+const multer  = require('multer');
+const fs  = require('fs');
+const os = require('os');
+const app = express();
 
-var path = require('path');
-var auth = require('basic-auth');
+const path = require('path');
+const auth = require('basic-auth');
+
+
+const config = require('./config.js');
+const admins = config.uploaderslist;
+const allowed_ext = config.allowed_ext;
+
 
 var reslist;
-
-
 var dir2scan = './'; // put the directory to scan here
 
 
@@ -51,11 +55,6 @@ function timestamp(){
   pad(d.getSeconds())
 }
 
-// user accounts credintials goes here
-const admins = { 'username': { password: 'password' },
-        'username2': { password: 'password2' },
-        'usernanem3': { password: 'passkkword3' }};
-
 
 //authentification
 				
@@ -70,14 +69,7 @@ function (request, response, next) {
   } else{
 	
 	console.log (user.name + ' has logged in at ' + timestamp() );
-  if (user.name === 'username2')
-    dir2scan = './';
-    
-  if (user.name === 'msrt')
-	  dir2scan = './';
-
-  if (user.name === 'username')
-	  dir2scan = './';
+  dir2scan =admins[user.name].path ;
 
 	reslist = getDirectoriesRecursive(dir2scan);
 	reslist = reslist.map(function(x){ return x.replace(/\\/g,"/") });
@@ -90,18 +82,12 @@ function (request, response, next) {
 )
 
 
-
-
-
-
 /////////////////
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
 	res.render('index', {data: reslist});
 });
-
-
 
 
 
@@ -126,15 +112,15 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage,
     fileFilter: function (req, file, callback) {
         var ext = path.extname(file.originalname);
-        if(ext !== '.mp4' && ext !== '.mkv' && ext !== '.avi' && ext !== '.mov') {
-            return callback(new Error('Only videos are allowed'))
+        if(! allowed_ext.includes(ext) ) {
+            return callback(new Error('file extension not allowed'))
         }
         callback(null, true)
     },
     limits:{
         fileSize: 1024 * 1024 * 1024 //1gb
     }
-		}).array('files', 12);
+		}).array('files', 100);
 		
 app.post('/upload', function (req, res, next) {
     upload(req, res, function (err) {

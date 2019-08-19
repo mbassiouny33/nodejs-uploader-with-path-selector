@@ -8,6 +8,9 @@
   <title>File Uploader</title>
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src ="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.3/dist/css/select2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.3/dist/js/select2.min.js"></script>
   <!--">-->
   <style>
 .btn:focus, .upload-btn:focus{
@@ -75,7 +78,7 @@ h2 {
 
 @media (min-width: 992px) {
   .container {
-    width: 650px;
+    width: 700px;
   }
 }
 
@@ -90,6 +93,8 @@ h2 {
     background-color: #DCDCDC;
     color: black;
     text-align: center;
+    padding-left:20px;
+    padding-right:20px;
 }
 </style>
   
@@ -105,18 +110,20 @@ h2 {
             <span class="glyphicon glyphicon-cloud-upload"></span>
 			
             <h2>File Uploader</h2>
-            <h4>mohamedh.ml</h4>
+            <h4>Mohamedh.ml</h4>
 
 			 <form action="/upload" method="post" enctype="multipart/form-data" id="myForm">
-            <input type="file" accept="video/*" name="files" class="btn btn-sec" id="file" multiple> </br>
+            <input type="file" name="files" class="btn btn-sec" id="file" multiple> </br>
 	
-			<select id = "pathselectorid" name ="pathselector">
+			
+          <select style="width:70%;" class = "dropdown" id = "pathselectorid" name ="pathselector">
 
 			</select>
 			</br>
-			<button class="btn btn-primary" type="submit" style="border-radius: 4px;">
-                Upload
-            </button>
+      
+      <div style="padding-top:10px;">
+        <button class="btn btn-primary" type="submit" style="border-radius: 4px;">Upload </button>
+      </div>
         </form>
           </div>
         </div>
@@ -124,16 +131,20 @@ h2 {
     </div>
   </div>
   <div class="footer">
-  <p>developed by <a href="https://mohamedh.ml"> Mohamedh </a> 
-</p>
-</div>
+      <span style="float: right">developed by <a href="http://Mohamedh.ml"> Mohamedh </a> </span>
+    
+      <span style="float: left"><a href="https://github.com/mbassiouny33">github </a> ||
+        <a href="https://mohamedh.ml/blog">My blog </a>||
+         </span>
+        
+    </div>
 	 
   
 
 
     <script type="text/javascript">
         document.getElementById("file").value = "";
-		
+        $("#pathselectorid").select2();		
 		//import iDoReturnAnArray from '../sserver.js';
 
 var select = document.getElementById("pathselectorid"); 
