@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>File Uploader</title>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!--">-->
+  <style>
+.btn:focus, .upload-btn:focus{
+  outline: 0 !important;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #4791D2;
+}
+
+body {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+.row {
+  margin-top: 80px;
+}
+
+.upload-btn {
+  color: #ffffff;
+  background-color: #F89406;
+  border: none;
+}
+
+.upload-btn:hover,
+.upload-btn:focus,
+.upload-btn:active,
+.upload-btn.active {
+  color: #ffffff;
+  background-color: #FA8900;
+  border: none;
+}
+
+h4 {
+  padding-bottom: 30px;
+  color: #B8BDC1;
+}
+
+.glyphicon {
+  font-size: 5em;
+  color: #9CA3A9;
+}
+
+h2 {
+  margin-top: 15px;
+  color: #68757E;
+}
+
+.panel {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.upload-input {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 650px;
+  }
+}
+
+
+.footer { 
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    background-color: #DCDCDC;
+    color: black;
+    text-align: center;
+}
+</style>
+  
+  
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="glyphicon glyphicon-cloud-upload"></span>
+			
+            <h2>File Uploader</h2>
+            <h4>mohamedh.ml</h4>
+
+			 <form action="/upload" method="post" enctype="multipart/form-data" id="myForm">
+            <input type="file" accept="video/*" name="files" class="btn btn-sec" id="file" multiple> </br>
+	
+			<select id = "pathselectorid" name ="pathselector">
+
+			</select>
+			</br>
+			<button class="btn btn-primary" type="submit" style="border-radius: 4px;">
+                Upload
+            </button>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+  <p>developed by <a href="https://mohamedh.ml"> Mohamedh </a> 
+</p>
+</div>
+	 
+  
+
+
+    <script type="text/javascript">
+        document.getElementById("file").value = "";
+		
+		//import iDoReturnAnArray from '../sserver.js';
+
+var select = document.getElementById("pathselectorid"); 
+
+
+ var rows = <%-JSON.stringify(data)%>  ;
+//console.log (rows);
+var options =  rows;
+//["public","views","anime/anime1", "2", "3", "4", "5", "6"]; 
+// Optional: Clear all existing options first:
+select.innerHTML = "";
+// Populate list with options:
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+	if(i == 0){
+	select.innerHTML += `<option  value=`+opt+ `>`+opt+`</option>`;
+	}else{
+	select.innerHTML += `<option value=`+opt+ `>`+opt+`</option>`;
+	}
+    //select.innerHTML += `<option value=`+opt+ `>`+opt+`</option>`;
+}
+
+    </script>
+</body>
+</html>
