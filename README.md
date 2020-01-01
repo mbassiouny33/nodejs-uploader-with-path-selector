@@ -9,7 +9,7 @@ clone this git repo and navigate to the folder then run the following command:
 
 First start by downlading this repo as a zip file or using git clone.
 
-Uploaders need an account. You can create accounts in the config file by modifying the uploaderslist vairable. By default there are 3 accounts with weak passwords that you should change, you have to specify the home folder(folder where file are uploaded) for each user in the same uploaderlist varaibale in config.js file see the exisiting example in config.js file.
+Uploaders need an account. You can create accounts in the config file by modifying the uploaderslist vairable. By default there are 3 accounts with weak passwords that you should change, you have to specify the home folder(folder where file are uploaded) for each user in the same uploaderlist varaibale in config.js file, see the exisiting example in config.js file.
 
 You can only allow specific file extensions by specifying them in const allowed_ext. 
 
